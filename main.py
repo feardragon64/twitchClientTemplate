@@ -7,7 +7,7 @@ from twitchpubsub import PubSubClient
 from twilioclient import TwilioClient
 
 
-scope = 'chat:read channel:read:redemptions communities_edit'
+scope = 'chat:read chat:edit channel:read:redemptions communities_edit'
 
 
 def main():
@@ -26,14 +26,13 @@ def main():
 
     chat_client = ChatClient(CHANNEL, oauth_token, twilio_client.bork_feed_text)
     chat_client.connect_to_chat()
+    twilio_client.set_callback(chat_client.send_chat_message)
 
     channel_id = get_channel_id(CHANNEL)
     topics = [
-        # 'community-points-channel-v1.{}'.format('45447642'),
         'community-points-channel-v1.{}'.format(channel_id),
     ]
 
-    # pubsub_client = PubSubClient('117qe6eghxzs78m9dkbzhjs53sp71r', channel, topics)
     pubsub_client = PubSubClient(oauth_token, CHANNEL, topics, twilio_client.bork_feed_text)
     pubsub_client.connect_to_pubsub()
 

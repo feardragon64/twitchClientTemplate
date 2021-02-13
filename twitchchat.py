@@ -108,7 +108,7 @@ class ChatClient(threading.Thread):
 
     def handle_gifted_sub(self, gifter, number):
         print("{} gifted {} subs".format(gifter, number))
-        if number > 20:
+        if number >= 2:
             print("BORK FEED!")
             self.on_event_fn()
 
@@ -117,6 +117,10 @@ class ChatClient(threading.Thread):
 
     def handle_raid(self, raiders, viewers):
         print("Raid from {} for {} viewers".format(raiders, viewers))
+
+    def send_chat_message(self, message):
+        print("Sending chat message in {}: {}".format(self.username, message))
+        self.ws.send('PRIVMSG #{} :{}'.format(self.username, message))
 
     def on_error(self, ws, error):
         print("Chat client error")
