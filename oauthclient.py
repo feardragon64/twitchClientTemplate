@@ -18,6 +18,7 @@ class OAuthClient:
                 browser_url = "{}&{}={}".format(browser_url, key, extra_params[key])
 
         webbrowser.open(browser_url)
+        print(browser_url)
         time.sleep(1)
 
         # Try for 30 seconds

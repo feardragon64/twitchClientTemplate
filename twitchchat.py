@@ -108,7 +108,7 @@ class ChatClient(threading.Thread):
 
     def handle_gifted_sub(self, gifter, number):
         print("{} gifted {} subs".format(gifter, number))
-        if number >= 2:
+        if number >= 20:
             print("BORK FEED!")
             self.on_event_fn()
 
